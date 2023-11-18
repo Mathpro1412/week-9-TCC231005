@@ -9,6 +9,9 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  CLUSTER_NAME: https://tcc-01.th1.proen.cloud/api/
+
 jobs:
   build-docker-image:
 
@@ -50,3 +53,13 @@ jobs:
         context: ./javascript
         push: true
         tags: anonja/nodejs-api-ci:latest
+    - name: Connect K8s
+      run: |
+        kubectl config set-cluster tcc-01 --server=${{ env.CLUSTER_NAME }} 
+        kubectl config set-context tcc-01 --cluster=tcc-01
+        kubectl config set-credentials tcc-01-user --token=${{ secrets.TCC01_TOKEN }}
+        kubectl config set-context tcc-01 --user=tcc-01-user
+        kubectl config use-context tcc-01
+    - name: Check CLUSTER_NAME
+      run: |
+        kubectl cluster-info
