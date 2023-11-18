@@ -21,7 +21,7 @@ jobs:
         working-directory: ./javascript # Here the path to the folder where package-lock.json is located.
     strategy:
       matrix:
-        node-version: [14.x, 16.x]
+        node-version: [14.x]
     #    node-version: [14.x, 16.x, 18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
@@ -63,3 +63,4 @@ jobs:
     - name: Check CLUSTER_NAME
       run: |
         kubectl cluster-info
+        kubectl apply -f javascript/manifest/deployment.yaml -n group-1
