@@ -63,4 +63,4 @@ jobs:
     - name: Check CLUSTER_NAME
       run: |
         kubectl cluster-info
-        kubectl apply -f ./javascript/manifest/deployment.yaml -n group-1
+        kubectl apply -f /Users/anonja/Desktop/github/week-9-TCC231005/javascript/manifest/deployment.yaml -n group-1
