@@ -39,6 +39,12 @@ jobs:
     - run: echo $SHA
       env:
         SHA: ${{  env.SHA }}
+    - name: Get Tag
+      id: prepare
+      uses: Surgo/docker-smart-tag-action@v1
+      with:
+        docker_image: anonja/nodejs-api-ci
+    - run: echo ${{ steps.prepare.outputs.tag }}
     #- name: Use Node.js ${{ matrix.node-version }}
     #  uses: actions/setup-node@v3
     #  with:
