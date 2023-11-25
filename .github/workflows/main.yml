@@ -93,4 +93,4 @@ jobs:
     - name: Check CLUSTER_NAME
       run: |
         kubectl cluster-info
-        kubectl apply -f manifest/dev/deployment.yaml -n group-1-dev-05
+        kubectl apply -f manifest/dev/deployment.yaml -n group-1-dev
