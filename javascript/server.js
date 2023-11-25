@@ -8,6 +8,11 @@ app.get("/greeting", (req, res) => {
   res.json({ message: `Hello, ${name}!` });
 });
 
+app.get("/hello", (req, res) => {
+  const name = req.query.name || "World";
+  res.json({ message: `Hello, ${name}!` });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
