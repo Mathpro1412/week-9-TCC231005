@@ -39,12 +39,19 @@ jobs:
     - run: echo $SHA
       env:
         SHA: ${{  env.SHA }}
-    - name: Get Tag
-      id: prepare
-      uses: Surgo/docker-smart-tag-action@v1
-      with:
-        docker_image: anonja/nodejs-api-ci
-    - run: echo ${{ steps.prepare.outputs.tag }}
+    - name: Set Env
+      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+    - name: "Test"
+      run: |
+          echo $RELEASE_VERSION
+          echo ${{ env.RELEASE_VERSION }}
+    # - name: Get Tag
+    #   id: prepare
+    #   uses: Surgo/docker-smart-tag-action@v1
+    #   with:
+    #     docker_image: anonja/nodejs-api-ci
+    # - run: echo ${{ steps.prepare.outputs.tag }}
+
     #- name: Use Node.js ${{ matrix.node-version }}
     #  uses: actions/setup-node@v3
     #  with:
