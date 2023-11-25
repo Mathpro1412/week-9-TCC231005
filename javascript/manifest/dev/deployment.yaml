@@ -16,7 +16,7 @@ spec:
         app: nginx-007
     spec:
       containers:
-        - image: anonja/nodejs-api-ci:1a08a7
+        - image: anonja/nodejs-api-ci:366a8b
           name: nginx-007
           resources: {}
 status: {}
