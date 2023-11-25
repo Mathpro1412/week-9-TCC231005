@@ -19,6 +19,8 @@ jobs:
     defaults:
       run:
         working-directory: ./javascript # Here the path to the folder where package-lock.json is located.
+    permissions:
+      contents: write
     strategy:
       matrix:
         node-version: [14.x]
@@ -46,6 +48,14 @@ jobs:
         cmd: yq -i '.spec.template.spec.containers.[0].image = "anonja/nodejs-api-ci:${{ env.SHA }}"' javascript/manifest/dev/deployment.yaml
     - name: images Dev
       run: cat /home/runner/work/week-9-TCC231005/week-9-TCC231005/javascript/manifest/dev/deployment.yaml
+    - name: update dev manifest
+      run: |
+        git config user.name "Anon Jansaichon"
+        git config user.email "MathPro1412"@users.noreply.github.com"
+        git add manifest/dev/*
+        git commit -m "Update manifest"
+        git push
+
     # - name: Set Env
     #   run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
     # - name: "Test"
