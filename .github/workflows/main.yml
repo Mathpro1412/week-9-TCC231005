@@ -51,7 +51,7 @@ jobs:
     - name: update dev manifest
       run: |
         git config user.name "Anon Jansaichon"
-        git config user.email "MathPro1412"@users.noreply.github.com"
+        git config user.email "MathPro1412@users.noreply.github.com"
         git add manifest/dev/*
         git commit -m "Update manifest"
         git push
