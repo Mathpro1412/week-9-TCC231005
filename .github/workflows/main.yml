@@ -39,12 +39,19 @@ jobs:
     - run: echo $SHA
       env:
         SHA: ${{  env.SHA }}
-    - name: Set Env
-      run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
-    - name: "Test"
-      run: |
-          echo $RELEASE_VERSION
-          echo ${{ env.RELEASE_VERSION }}
+    - name: Get an entry with a variable that might contain dots or spaces
+      id: get_username
+      uses: mikefarah/yq@master
+      with:
+        cmd: yq -i '.spec.template.spec.containers.[0].image = "anonja/nodejs-api-ci:${{ env.SHA }}"' javascript/manifest/dev/deployment.yaml
+    - name: images Dev
+      run: cat javascript/manifest/dev/deployment.yaml
+    # - name: Set Env
+    #   run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+    # - name: "Test"
+    #   run: |
+    #       echo $RELEASE_VERSION
+    #       echo ${{ env.RELEASE_VERSION }}
     # - name: Get Tag
     #   id: prepare
     #   uses: Surgo/docker-smart-tag-action@v1
@@ -75,7 +82,7 @@ jobs:
       with:
         context: ./javascript
         push: true
-        tags: anonja/nodejs-api-ci:${{  env.SHA }}
+        tags: anonja/nodejs-api-ci:${{ env.SHA }}
     # - name: Connect K8s
     #   run: |
     #     kubectl config set-cluster tcc-01 --server=${{ env.CLUSTER_NAME }} 
