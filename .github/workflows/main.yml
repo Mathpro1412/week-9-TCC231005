@@ -45,7 +45,7 @@ jobs:
       with:
         cmd: yq -i '.spec.template.spec.containers.[0].image = "anonja/nodejs-api-ci:${{ env.SHA }}"' javascript/manifest/dev/deployment.yaml
     - name: images Dev
-      run: cat javascript/manifest/dev/deployment.yaml
+      run: cat /home/runner/work/week-9-TCC231005/week-9-TCC231005/javascript/manifest/dev/deployment.yaml
     # - name: Set Env
     #   run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
     # - name: "Test"
